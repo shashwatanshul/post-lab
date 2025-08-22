@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  #root {
+    @apply flex flex-col;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-sans text-gray-900 bg-white leading-relaxed;
+    font-family: "Inter Tight", Verdana, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+@layer components {
+  .container {
+    /* No global horizontal margins or padding; set per-component */
+    @apply max-w-7xl;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  }
+
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent;
+  }
+
+  .floating-grid {
+    @apply grid h-full grid-cols-4;
+  }
+  .floating-grid-col {
+    @apply border-r border-gray-200;
+  }
+  .floating-grid-col.first {
+    @apply border-l border-gray-200;
+  }
+
+  .marquee {
+    @apply relative overflow-hidden bg-black text-white py-6;
+  }
+
+  .marquee-inner {
+    @apply absolute whitespace-nowrap will-change-transform flex items-center;
+    animation: marquee-horizontal 30s linear infinite;
+  }
+
+  .marquee-inner:hover {
+    animation-play-state: paused;
+  }
+
+  .marquee-text {
+    @apply text-4xl flex items-center gap-4;
+  }
+
+  .marquee-contact {
+    @apply underline;
+  }
+
+  .marquee-arrow {
+    @apply w-14 h-14 mx-8;
+  }
+
+  .footer-link {
+    @apply hover:underline;
+  }
+
+  .contact-form-label {
+    @apply block text-sm font-bold uppercase tracking-widest mb-2;
+  }
+
+  .contact-form-field,
+  .contact-form-textarea {
+    @apply w-full bg-transparent border-b border-gray-300 py-3 text-xl placeholder-gray-400 focus:outline-none focus:border-black mb-8;
+  }
+
+  .contact-form-btn {
+    @apply text-xl font-medium underline;
+  }
+
+  @keyframes marquee-horizontal {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+}
+
+/* GSAP and Framer Motion will handle more complex animations */
+.gsap-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.gsap-slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.gsap-slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.gsap-scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+}

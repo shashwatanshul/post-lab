@@ -1,0 +1,12 @@
+# public_html/.htaccess  (place it next to your built index.html)
+
+RewriteEngine On
+RewriteBase /
+
+# Let existing files and folders through (e.g., /assets/*, images, fonts)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# For everything else, serve index.html so React Router can handle it
+RewriteRule ^ index.html [L]
