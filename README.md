@@ -2,6 +2,48 @@
 
 This document provides a comprehensive overview of the project, including technology choices, challenges faced, implementation details, and design strategies.
 
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+You need to have Node.js and npm installed on your machine. You can download them from [nodejs.org](https://nodejs.org/).
+
+### Installation & Setup
+
+1.  **Download the project**: Download the zip file of the project from the GitHub repository.
+2.  **Extract the files**: Extract the contents of the zip file to a folder of your choice.
+3.  **Navigate to the project directory**:
+    ```sh
+    cd post-lab
+    ```
+4.  **Install NPM packages**:
+    ```sh
+    npm install
+    ```
+    This will install all the necessary dependencies and set up the `node_modules` folder.
+
+### Running the Project
+
+To run the project in development mode, which is ideal for making changes and seeing them live, use the following command:
+
+```sh
+npm run dev
+```
+
+This will start the Vite development server. You can view the project in your browser at the local URL provided in the terminal (usually `http://localhost:5173/`).
+
+### Building for Production
+
+When you are ready to deploy the project, you need to create a production-ready build. This can be done with the following command:
+
+```sh
+npm run build
+```
+
+This command will create a `dist` folder in the project root. This folder contains the optimized and minified files that are ready to be hosted on a web server.
+
 ## Technology Choices and Reasoning
 
 - **React**: Chosen for its component-based architecture, which promotes reusability and maintainability. Its large ecosystem and community support make it a robust choice for building modern user interfaces.
