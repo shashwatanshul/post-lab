@@ -81,7 +81,7 @@ const HeroWithCards = () => {
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const r = 450; // 900px glow radius
+    const r = 600; // 1200px glow radius
     glowX.set(x - r);
     glowY.set(y - r);
   };
@@ -95,17 +95,17 @@ const HeroWithCards = () => {
     >
       {/* shared floating yellow glow */}
       <motion.div
-        className="pointer-events-none absolute rounded-full opacity-90"
+        className="pointer-events-none absolute rounded-full"
         style={{
           top: 0,
           left: 0,
-          width: 900,
-          height: 900,
+          width: 1500,
+          height: 1500,
           x: springX,
           y: springY,
           background:
-            "radial-gradient(closest-side, rgba(255,230,92,0.9), rgba(255,230,92,0.45), rgba(255,230,92,0))",
-          filter: "blur(20px)",
+            "radial-gradient(closest-side, rgba(255,245,100,1), rgba(255,245,100,0.5), rgba(255,245,100,0))",
+          filter: "blur(30px)",
           zIndex: -1,
         }}
       />

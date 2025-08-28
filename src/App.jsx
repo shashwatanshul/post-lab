@@ -9,6 +9,7 @@ import Lenis from "lenis";
 import Layout from "./components/layout/Layout";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import "./App.css";
 
@@ -54,6 +55,7 @@ function App() {
             <Route path="/" element={<Navigate to="/about" replace />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             {/* Fallback route */}
             <Route path="*" element={<Navigate to="/about" replace />} />
           </Routes>

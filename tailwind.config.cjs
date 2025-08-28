@@ -12,6 +12,7 @@ module.exports = {
           "Arial",
           "sans-serif",
         ],
+        interTight: ["Inter Tight", "Verdana", "sans-serif"],
       },
       colors: {
         primary: {
