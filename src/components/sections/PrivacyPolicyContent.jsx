@@ -1,11 +1,19 @@
+// Import React hooks for component lifecycle and DOM references
 import React, { useEffect, useRef } from "react";
+// Import GSAP animation library for scroll-driven animations
 import { gsap } from "gsap";
+// Import ScrollTrigger plugin for scroll-based animation triggers
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Register ScrollTrigger plugin globally to enable scroll-based animations
 gsap.registerPlugin(ScrollTrigger);
 
+// Privacy policy data structure - contains all privacy policy sections
+// Each object represents a section with title and JSX content
+// This approach allows for easy content management and updates
 const privacyData = [
   {
+    // Section 1: Effective date and company contact information
     title: "Effective Date: May 1, 2025",
     content: (
       <>
@@ -35,6 +43,7 @@ const privacyData = [
     ),
   },
   {
+    // Section 2: Purpose of the privacy policy
     title: "Purpose",
     content: (
       <>
@@ -52,6 +61,7 @@ const privacyData = [
     ),
   },
   {
+    // Section 3: GDPR compliance notice
     title: "GDPR",
     content: (
       <p>
@@ -353,81 +363,121 @@ const privacyData = [
   },
 ];
 
+/**
+ * PrivacySection component - renders individual privacy policy section
+ * Features responsive grid layout with sticky heading behavior on desktop
+ *
+ * @param {string} title - Section heading text
+ * @param {React.ReactNode} content - JSX content for the section
+ * @param {Function} headingRef - Ref callback for GSAP animation targeting
+ */
 const PrivacySection = ({ title, content, headingRef }) => (
+  // Grid layout: responsive design with 12-column system on desktop
   <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 py-12">
+    {/* Heading column: spans 5 columns on desktop, full width on mobile */}
     <div className="md:col-span-5 mb-4 md:mb-0">
       <h2
-        ref={headingRef}
+        ref={headingRef} // Ref for GSAP sticky animation targeting
         className="text-2xl md:text-4xl pr-2 md:pr-[10px] h5 privacy-heading font-interTight"
       >
         {title}
       </h2>
     </div>
+    {/* Content column: spans 5 columns starting at column 8 (creates gap) */}
     <div className="md:col-span-5 md:col-start-8 rich-text w-richtext">
+      {/* Content wrapper with consistent spacing between elements */}
       <div className="space-y-4 text-gray-700">{content}</div>
     </div>
   </div>
 );
 
+/**
+ * PrivacyPolicyContent component - main container for privacy policy sections
+ * Features sticky heading animations on desktop using GSAP ScrollTrigger
+ * Responsive layout with background grid pattern and section separators
+ *
+ * Animation: Headings stick to top while their content scrolls underneath
+ * Only active on desktop (min-width: 768px) for better UX
+ */
 const PrivacyPolicyContent = () => {
+  // Reference to the main component container
   const componentRef = useRef(null);
+  // Array of references to each section container for ScrollTrigger
   const sectionRefs = useRef([]);
+  // Array of references to each heading for sticky animation
   const headingRefs = useRef([]);
 
+  // Effect runs on component mount to set up sticky heading animations
   useEffect(() => {
+    // Ensure ref arrays match the number of privacy sections
     sectionRefs.current = sectionRefs.current.slice(0, privacyData.length);
     headingRefs.current = headingRefs.current.slice(0, privacyData.length);
 
+    // GSAP matchMedia for responsive animation setup
     const mm = gsap.matchMedia();
 
+    // Only apply sticky animations on desktop (768px and above)
     mm.add("(min-width: 768px)", () => {
+      // Create ScrollTrigger for each heading to make it sticky
       const triggers = headingRefs.current.map((heading, index) => {
         return ScrollTrigger.create({
-          trigger: sectionRefs.current[index],
-          start: "top top",
+          trigger: sectionRefs.current[index], // Section that triggers the animation
+          start: "top top", // Animation starts when section reaches top
+          // End when section content has scrolled past the heading height
           end: () =>
             `+=${heading.parentElement.offsetHeight - heading.offsetHeight}`,
-          pin: heading,
-          pinSpacing: false,
-          pinType: "transform",
-          scrub: 1,
+          pin: heading, // Pin the heading element in place
+          pinSpacing: false, // Don't add spacing for pinned element
+          pinType: "transform", // Use transform for better performance
+          scrub: 1, // Smooth scrolling animation
         });
       });
+
+      // Cleanup function for when matchMedia condition changes
       return () => {
         triggers.forEach((trigger) => trigger.kill());
       };
     });
 
+    // Cleanup function runs when component unmounts
     return () => {
-      mm.revert();
+      mm.revert(); // Revert all matchMedia conditions
     };
-  }, []);
+  }, []); // Empty dependency array - runs once on mount
 
   return (
+    // Main section container with relative positioning for layered content
     <section
       ref={componentRef}
       className="privacy-section relative bg-white text-black"
     >
+      {/* Background decorative grid - positioned behind content */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Floating grid container with max width and center alignment */}
         <div className="floating-grid h-full max-w-[1400px] mx-auto">
+          {/* Grid columns - creates subtle vertical line pattern */}
           <div className="floating-grid-col first"></div>
           <div className="floating-grid-col"></div>
           <div className="floating-grid-col"></div>
           <div className="floating-grid-col last"></div>
         </div>
       </div>
+
+      {/* Main content area positioned above background grid */}
       <div className="relative z-10">
+        {/* Map through privacy data to render each section */}
         {privacyData.map((item, index) => (
           <div
             key={index}
-            ref={(el) => (sectionRefs.current[index] = el)}
-            className="border-b border-gray-300"
+            ref={(el) => (sectionRefs.current[index] = el)} // Assign ref for ScrollTrigger
+            className="border-b border-gray-300" // Bottom border separator between sections
           >
+            {/* Section content container with consistent max width and padding */}
             <div className="max-w-[1400px] px-4 md:px-10">
               <PrivacySection
-                title={item.title}
-                content={item.content}
-                headingRef={(el) => (headingRefs.current[index] = el)}
+                title={item.title} // Section heading
+                content={item.content} // Section JSX content
+                headingRef={(el) => (headingRefs.current[index] = el)} // Heading ref for sticky animation
               />
             </div>
           </div>
@@ -437,4 +487,5 @@ const PrivacyPolicyContent = () => {
   );
 };
 
+// Export as default for use in PrivacyPolicy page
 export default PrivacyPolicyContent;

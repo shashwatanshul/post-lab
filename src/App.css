@@ -1,83 +1,102 @@
-/* App-specific styles */
+/* App-specific styles - Styles that are unique to this application */
 
-/* Smooth scrolling enhancement for Lenis */
+/* Lenis Smooth Scrolling Library Integration */
+/* These classes are automatically applied by Lenis for smooth scroll functionality */
+
+/* Override default height behavior when Lenis is active */
 html.lenis {
-  height: auto;
+  height: auto; /* Allow dynamic height for smooth scrolling calculations */
 }
 
+/* Disable browser's native smooth scrolling when Lenis smooth scrolling is active */
 .lenis.lenis-smooth {
-  scroll-behavior: auto;
+  scroll-behavior: auto; /* Let Lenis handle all scroll behavior instead of browser */
 }
 
+/* Prevent overscroll bounce effects on elements that should not scroll with Lenis */
 .lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+  overscroll-behavior: contain; /* Contain scroll within the element boundaries */
 }
 
+/* Hide overflow when Lenis scrolling is stopped/paused */
 .lenis.lenis-stopped {
-  overflow: hidden;
+  overflow: hidden; /* Prevent any scrolling when Lenis is intentionally stopped */
 }
 
+/* Disable pointer events on iframes during Lenis scrolling for better performance */
 .lenis.lenis-scrolling iframe {
-  pointer-events: none;
+  pointer-events: none; /* Prevent iframe interactions during scroll animations */
 }
 
+/* Main App Container Styling */
 /* Custom scroll behavior enhancements */
 .App {
-  position: relative;
-  overflow-x: hidden;
+  position: relative; /* Establish positioning context for child elements */
+  overflow-x: hidden; /* Prevent horizontal scrollbars from appearing */
 }
 
-/* Loading states */
+/* Loading State Management */
+/* Classes for managing loading transitions and user interactions */
+
+/* Hidden loading state - invisible and non-interactive */
 .loading {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  opacity: 0; /* Completely transparent */
+  pointer-events: none; /* Disable all mouse/touch interactions */
+  transition: opacity 0.3s ease; /* Smooth fade transition */
 }
 
+/* Loaded state - visible and interactive */
 .loaded {
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 1; /* Fully visible */
+  pointer-events: auto; /* Enable all mouse/touch interactions */
 }
 
-/* Focus improvements for accessibility */
+/* Accessibility Enhancements */
+/* Focus improvements for better keyboard navigation and screen reader support */
+
+/* Remove default focus outline for all elements (will be replaced by focus-visible) */
 *:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+  outline: 2px solid transparent; /* Transparent outline maintains layout without visual distraction */
+  outline-offset: 2px; /* Space between element and outline */
 }
 
+/* Modern focus indicator - only shows when keyboard navigating */
 *:focus-visible {
-  outline: 2px solid #0ea5e9;
-  outline-offset: 2px;
+  outline: 2px solid #0ea5e9; /* Primary blue color for focus indicator */
+  outline-offset: 2px; /* Space between element and focus ring */
 }
 
-/* Print styles */
+/* Print Media Styles */
+/* Optimize appearance when users print the page */
 @media print {
   * {
-    background: transparent !important;
-    color: black !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
+    background: transparent !important; /* Remove all background colors/images for ink savings */
+    color: black !important; /* Ensure all text is black for maximum readability */
+    box-shadow: none !important; /* Remove shadows that don't print well */
+    text-shadow: none !important; /* Remove text shadows for cleaner print output */
   }
 }
 
-/* High contrast mode support */
+/* High Contrast Mode Support */
+/* Accessibility enhancement for users who prefer high contrast */
 @media (prefers-contrast: high) {
   .text-gradient {
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-    color: #000;
+    background: none; /* Remove gradient background */
+    -webkit-background-clip: initial; /* Reset background clip */
+    -webkit-text-fill-color: initial; /* Reset text fill color */
+    color: #000; /* Use solid black text for maximum contrast */
   }
 }
 
-/* Reduced motion preferences */
+/* Reduced Motion Preferences */
+/* Accessibility feature for users with motion sensitivity or vestibular disorders */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
   ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important; /* Make animations virtually instant */
+    animation-iteration-count: 1 !important; /* Prevent infinite animations */
+    transition-duration: 0.01ms !important; /* Make transitions virtually instant */
+    scroll-behavior: auto !important; /* Disable smooth scrolling */
   }
 }

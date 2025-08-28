@@ -1,136 +1,178 @@
+/* Tailwind CSS Directives - These are processed by PostCSS and Tailwind */
+/* Import Tailwind's base styles (normalize, default element styles) */
 @tailwind base;
+/* Import Tailwind's component classes (reusable UI patterns) */
 @tailwind components;
+/* Import Tailwind's utility classes (single-purpose classes like p-4, text-center) */
 @tailwind utilities;
 
+/* Import Inter Tight font from Google Fonts with all weights */
+/* display=swap ensures text remains visible during font swap */
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+/* Base layer - fundamental styles that override browser defaults */
 @layer base {
+  /* Apply box-sizing: border-box to all elements for consistent sizing */
   * {
     @apply box-border;
   }
 
+  /* Ensure full height layout for the entire application */
   html,
   body,
   #root {
     @apply h-full;
   }
 
+  /* Make root container a flex column for layout structure */
   #root {
     @apply flex flex-col;
   }
 
+  /* Enable smooth scrolling behavior for anchor links and programmatic scrolling */
   html {
     @apply scroll-smooth;
   }
 
+  /* Set default body styles including typography and background */
   body {
     @apply font-sans text-gray-900 bg-white leading-relaxed;
+    /* Override font-sans with Inter Tight for better typography */
     font-family: "Inter Tight", Verdana, sans-serif;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar styling for webkit browsers (Chrome, Safari, Edge) */
+  /* Set scrollbar width to 8px (w-2) */
   ::-webkit-scrollbar {
     @apply w-2;
   }
 
+  /* Style the scrollbar track (background area) */
   ::-webkit-scrollbar-track {
     @apply bg-gray-100;
   }
 
+  /* Style the scrollbar thumb (draggable part) */
   ::-webkit-scrollbar-thumb {
     @apply bg-gray-300 rounded-full;
   }
 
+  /* Change thumb color on hover for better UX */
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-400;
   }
 }
 
+/* Components layer - reusable component classes that can be applied across the app */
 @layer components {
+  /* Base container class with max width but no margins - allows flexible positioning */
   .container {
     /* No global horizontal margins or padding; set per-component */
     @apply max-w-7xl;
   }
 
+  /* Primary button component with blue theme, hover effects, and accessibility features */
   .btn-primary {
     @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
   }
 
+  /* Secondary button component with gray theme and same interaction patterns */
   .btn-secondary {
     @apply bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium py-3 px-6 rounded-lg transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
   }
 
+  /* Consistent section padding across different screen sizes */
   .section-padding {
     @apply py-16 lg:py-24;
   }
 
+  /* Gradient text effect from primary blue to purple */
   .text-gradient {
     @apply bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent;
   }
 
+  /* Grid layout component for background decorative elements */
   .floating-grid {
     @apply grid h-full grid-cols-4;
   }
+  /* Grid column styling with right border */
   .floating-grid-col {
     @apply border-r border-gray-200;
   }
+  /* First column gets left border to complete the grid */
   .floating-grid-col.first {
     @apply border-l border-gray-200;
   }
 
+  /* Marquee container with dark background and overflow hidden for scrolling effect */
   .marquee {
     @apply relative overflow-hidden bg-black text-white py-6;
   }
 
+  /* Inner marquee content with horizontal scrolling animation */
   .marquee-inner {
     @apply absolute whitespace-nowrap will-change-transform flex items-center;
+    /* 30-second linear infinite horizontal scrolling animation */
     animation: marquee-horizontal 30s linear infinite;
   }
 
+  /* Pause animation on hover for better readability */
   .marquee-inner:hover {
     animation-play-state: paused;
   }
 
+  /* Large text styling for marquee content */
   .marquee-text {
     @apply text-4xl flex items-center gap-4;
   }
 
+  /* Underlined contact text within marquee */
   .marquee-contact {
     @apply underline;
   }
 
+  /* Arrow icon sizing within marquee */
   .marquee-arrow {
     @apply w-14 h-14 mx-8;
   }
 
+  /* Footer link styling with hover underline effect */
   .footer-link {
     @apply hover:underline;
   }
 
+  /* Contact form label styling - uppercase, bold, with letter spacing */
   .contact-form-label {
     @apply block text-sm font-bold uppercase tracking-widest mb-2;
   }
 
+  /* Contact form input and textarea styling with bottom border focus effect */
   .contact-form-field,
   .contact-form-textarea {
     @apply w-full bg-transparent border-b border-gray-300 py-3 text-xl placeholder-gray-400 focus:outline-none focus:border-black mb-8;
   }
 
+  /* Contact form submit button styling */
   .contact-form-btn {
     @apply text-xl font-medium underline;
   }
 
+  /* Keyframe animation for horizontal marquee scrolling effect */
   @keyframes marquee-horizontal {
     from {
+      /* Start at original position */
       transform: translateX(0);
     }
     to {
+      /* Move left by 50% to create seamless loop */
       transform: translateX(-50%);
     }
   }
 }
 
+/* Utilities layer - single-purpose utility classes for fine-tuned control */
 @layer utilities {
+  /* Animation delay utilities for staggered animations */
   .animation-delay-200 {
     animation-delay: 200ms;
   }
@@ -148,22 +190,28 @@
   }
 }
 
+/* GSAP Animation Classes - Initial states for GSAP-powered animations */
 /* GSAP and Framer Motion will handle more complex animations */
+
+/* Fade in animation - starts invisible and slightly below */
 .gsap-fade-in {
   opacity: 0;
   transform: translateY(30px);
 }
 
+/* Slide in from left animation - starts invisible and shifted left */
 .gsap-slide-in-left {
   opacity: 0;
   transform: translateX(-50px);
 }
 
+/* Slide in from right animation - starts invisible and shifted right */
 .gsap-slide-in-right {
   opacity: 0;
   transform: translateX(50px);
 }
 
+/* Scale in animation - starts invisible and slightly smaller */
 .gsap-scale-in {
   opacity: 0;
   transform: scale(0.8);
